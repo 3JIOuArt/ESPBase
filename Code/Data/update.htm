@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ESP8266 test</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/style.css">
+<script type="text/javascript" src="/function.js"></script>
+<script>
+function getFileName () {
+var file = document.getElementById ('uploaded-file').value;
+file = file.replace (/\\/g, «/»).split ('/').pop ();
+document.getElementById ('file-name').innerHTML = 'File name: ' + file;
+}
+</script>
+</head>
+<body>
+
+    <form method="POST" action="/update" enctype="multipart/form-data">
+     <div class="btn-group">
+      <input type="file" class="btn btn-primary btn-xs" name="update" style="height: 33px;">
+      <input type="submit" class="btn btn-default btn-sm" value="загрузить" onclick="this.value='Подождите...',document.getElementById('myProgress').style.display='block',
+      move(),document.getElementById('butt').style.display='none',
+      document.getElementById('filename').style.display='none',
+      document.getElementById('upl').style.display='none'">
+     </div>
+    </form>
+
+<br><div id="myProgress">
+  <div id="myBar"></div>
+</div>
+</body>
+</html>

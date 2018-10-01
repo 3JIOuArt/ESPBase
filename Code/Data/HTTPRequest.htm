@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ESP8266 test</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/style.css">
+<script type="text/javascript" src="/function.js"></script>
+<script type="text/javascript">
+
+function set_HTTPRequest(submit){
+    server = "/HTTPRequest?HTTPRequest="+val('HTTPRequest');
+    send_request(submit,server);
+    alert("Request server changed");
+   }
+
+   function reloadValue(){
+     loadGet();
+    var x = "{{RAW string}}";
+    document.getElementById("RAW string").value = x;
+  }
+
+</script>
+<style>
+input[id] {
+    width: 800px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #333;
+    outline: none;
+  }
+</style>
+</head>
+
+<body onload="loadGet();">
+  <div>
+  <h3>HTTP REQUEST</h3>
+       <input id="HTTPRequest" value="{{HTTPRequest}}">
+       <input class="button" value="SAVE" onclick="set_HTTPRequest(this);" type="submit">
+  </div>
+
+  <div>
+  <h3>HTTP GET RAW</h3>
+       <input class="button" value="GET" onclick="loadGet(), reloadValue();">
+       <div>
+         <input id="RAW string" value="{{RAW string}}">
+          <input id="test" value="{{RAW string}}">
+       </div>
+  </div>
+</body>
+</html>

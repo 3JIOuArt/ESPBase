@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ESP8266 test</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/style.css">
+<script type="text/javascript" src="/function.js"></script>
+<script type="text/javascript">
+function handleServerResponse(){
+    document.body.style.backgroundColor="rgb("+jsonResponse.rgb+")";
+   }
+</script>
+
+</head>
+
+<body onload="loadNRF();">
+<h3>ID</h3>
+<input id="ID" value="{{ID}}">
+<h3>Temperature</h3>
+<input id="temp" value="{{temp}}">
+<h3>Hummidity</h3>
+<input id="hum" value="{{hum}}">
+<h3>Battery voltage</h3>
+<input id="vBat" value="{{vBat}}">
+<h3>Panel voltage</h3>
+<input id="vPanel" value="{{vPanel}}">
+<h3>Counter</h3>
+<input id="Counter" value="{{Counter}}">
+
+</body>
+</html>

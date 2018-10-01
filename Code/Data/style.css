@@ -1,0 +1,92 @@
+.button {
+    width: 280px;
+    background-color: #333;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #ddd;
+	    color: black;
+}
+
+body{
+text-align: center;
+}
+
+br {
+ border: none;
+}
+
+
+input[id] {
+    width: 280px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #333;
+    outline: none;
+}
+
+input[id]:focus {
+    border: 2px solid #333;
+}
+
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+  display:none;
+}
+
+#myBar {
+  width: 0%;
+  height: 30px;
+  background-color: #333;
+}
+
+.file-upload {
+     position: relative; /* Даем возможность делать позиционирование, внутри данного элемента */
+     overflow: hidden; /* Все что выходит за пределы - скрываем */
+     width: 100px;
+     height: 20px; /* Задаем высоту кнопки выбора файла */
+     background: #333;
+     border: none;
+     padding: 12px 32px;
+     color: white;
+     text-align: center;
+}
+.file-upload:hover {
+  background-color: #ddd;
+   color: black;
+}
+.file-upload input[type="file"]{
+    display: none; /* Обязательно скрываем настоящий Input File */
+}
+.file-upload label {
+     /* Растягиваем label на всю возможную площадь блока .file-upload */
+     display: block;
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     cursor: pointer;
+}
+.file-upload span {
+     line-height: 42x; /* Делаем вертикальное выравнивание текста, который написан на кнопке */
+     font-size: 18px;
+     font-weight:bold;
+}
+.filename {
+     background: #fff;
+     border: 0;
+     text-align: left;
+}

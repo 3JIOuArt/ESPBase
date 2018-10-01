@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ESP8266 test</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/style.css">
+<script type="text/javascript" src="/function.js"></script>
+<script type="text/javascript">
+function handleServerResponse(){
+    document.body.style.backgroundColor="rgb("+jsonResponse.rgb+")";
+   }
+
+function set_ssid(submit){
+    server = "/ssid?ssid="+val('ssid')+"&password="+encodeURIComponent(val('password'));
+    send_request(submit,server);
+    alert("Измененя вступят в силу после перезагрузки. Пожалуйта перезагрузите устройство.");
+   }
+
+function set_ssidAP(submit){
+    server = "/ssidAP?ssidAP="+val('ssidAP')+"&passwordAP="+encodeURIComponent(val('passwordAP'));
+    send_request(submit,server);
+    alert("Измененя вступят в силу после перезагрузки. Пожалуйта перезагрузите устройство.");
+   }
+
+
+</script>
+</head>
+
+ <body onload="load();">
+<div>
+<h3>WIFI SETUP</h3>
+     <input id="ssid" value="{{ssid}}" pattern="[0-9a-zA-Z.]{1,15}">
+     <br><input id="password" value="{{password}}" pattern=".{8,15}" type="password"></br>
+     <input class="button" value="Сохранить" onclick="set_ssid(this);" type="submit">
+</div>
+
+<br><div>
+<h3>TARGET MODE SETUP</h3>
+     <input id="ssidAP" value="{{ssidAP}}" pattern="[0-9a-zA-Z.]{1,15}">
+     <br><input id="passwordAP" value="{{passwordAP}}" pattern=".{8,15}" type="password"></br>
+     <input class="button" value="Сохранить" onclick="set_ssidAP(this);" type="submit">
+</div></br>
+</body>
+</html>
