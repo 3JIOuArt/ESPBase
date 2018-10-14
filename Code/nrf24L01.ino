@@ -20,7 +20,9 @@ void NRF_init(void) {
 void NRF_read(void) {
   int Loop = 0;
   String NRF_DATA;
+  
   NRF_Reg();
+  
   while (Loop < 5) {
     if (radio.available()) {
       radio.read(&Data, sizeof(Data));
@@ -37,22 +39,31 @@ void NRF_read(void) {
   Serial.println(Data.Counter);
   Serial.println("   ");
   
-  time_t now = time(nullptr);
-  NRF_DATA += ctime(&now);
-  NRF_DATA += "Temp:";
-  NRF_DATA += Data.temp;
-  NRF_DATA += ", Humidity:";
-  NRF_DATA += Data.hum;
-  NRF_DATA +=", Ligt:";
-  NRF_DATA +=Data.light;
-  NRF_DATA +=", vBattery:";
-  NRF_DATA +=Data.vBat;
-  NRF_DATA +=", vPanel:";
-  NRF_DATA +=Data.vPanel;
-  NRF_DATA +=", Counter:";
-  NRF_DATA +=Data.Counter;
+  GetTimeString();
+  GetDateChStr ();
   
-  SaveData(NRF_DATA);  
+  if (Data.temp + Data.hum + Data.light + Data.vBat != 0.00) {
+    NRF_DATA += TimeString;
+    NRF_DATA += "Temp:";
+    NRF_DATA += Data.temp;
+    NRF_DATA += ", Humidity:";
+    NRF_DATA += Data.hum;
+    NRF_DATA += ", Ligt:";
+    NRF_DATA += Data.light;
+    NRF_DATA += ", vBattery:";
+    NRF_DATA += Data.vBat;
+    NRF_DATA += ", vPanel:";
+    NRF_DATA += Data.vPanel;
+    NRF_DATA += ", Counter:";
+    NRF_DATA += Data.Counter;
+
+    SaveData(NRF_DATA);
+    TimeString = "";
+    DateString = "";
+  }
+  else {
+    Serial.println("-----NRF data wrong-----");
+  }
 }
 
 void NRF_Reg(void) {
@@ -67,13 +78,13 @@ void NRF_Reg(void) {
 }
 
 bool SaveData(String data) {
-  File NRFData = SPIFFS.open("/NRFData.txt", "a");
+File NRFData = SPIFFS.open(Filename, "a");
   if (!NRFData) {
-    Serial.println("Failed to open NRFData.txt for writing");
+    Serial.println("Failed to open file for writing");
     return false;
   }
   NRFData.println(data);
   Serial.println("---------NRFData SAVED----------");
   return true;
   NRFData.close();
-  }
+}

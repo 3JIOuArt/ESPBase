@@ -10,17 +10,16 @@
 #include <WiFiUdp.h>
 #include <time.h>
 
-int timezone = -5;
-int dst = 0;
+struct tm * ptm;
+String TimeString;
+String DateString;
 
 IPAddress apIP(192, 168, 4, 1);
 ESP8266WebServer HTTP(80);
-
 #define BUFF_SIZE 64
 
 RF24 radio(D1, D2);
-
-const int    chipSelect = D8;
+#define chipSele D8;
 
 struct dataStruct{
    float id;
@@ -39,21 +38,18 @@ String _password   = "2048230907";
 String _ssidAP     = "MTTEST";
 String _passwordAP = "2048230907";
 String _SSDP_Name   = "ESPOST";
-String HTTPRequest   = "192.168.100.101/sensors";
+String HTTPRequest   = "192.168.100.100/sensors";
 
 String HTTPGET   = "{}";
 String jsonConfig = "{}";
 String jsonNRF = "{}";
 
-unsigned int localPort = 2390;      // local port to listen for UDP packets
-IPAddress timeServer(129, 6, 15, 28); // time.nist.gov NTP server
-const int NTP_PACKET_SIZE = 48; // NTP time stamp is in the first 48 bytes of the message
-byte packetBuffer[ NTP_PACKET_SIZE]; //buffer to hold incoming and outgoing packets
+#define localPort 2390      // local port to listen for UDP packets
 WiFiUDP Udp;
 
 unsigned long previousMillis = 0;
 const long interval = 5000;
-
+char Filename[16];
 
 void setup() {
   Serial.begin(115200); 
@@ -64,7 +60,8 @@ void setup() {
   SSDP_init();
   HTTP_init();
   NRF_init();
-  Time_init();
+  Time_init(); 
+
   if ( MDNS.begin ( "esp8266" ) ) {
   }
   Udp.begin(localPort);
@@ -74,7 +71,7 @@ void setup() {
 void loop() {
    unsigned long currentMillis = millis();
   if(currentMillis - previousMillis >= interval) {
-    previousMillis = currentMillis;   
+    previousMillis = currentMillis;  
     NRF_read();
   }
    HTTP.handleClient();
