@@ -1,5 +1,5 @@
 void Time_init(){
-  configTime(-5 * 3600, 0, "pool.ntp.org", "time.nist.gov");
+  configTime(-6 * 3600, 0, "pool.ntp.org", "time.nist.gov");
   Serial.println("\nWaiting for time");
   while (!time(nullptr)) {
     Serial.print(".");
@@ -28,7 +28,6 @@ void GetTimeString(){
   else{
   TimeString += ptm->tm_sec;
   }
-  TimeString += ", ";
 }
 
 void GetDateChStr(void){

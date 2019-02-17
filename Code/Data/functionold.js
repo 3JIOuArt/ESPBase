@@ -7,6 +7,7 @@ function createXmlHttpObject(){
  }
  return xmlHttp;
 }
+
 function load(){
  if(xmlHttp.readyState===0 || xmlHttp.readyState==4){
   xmlHttp.open('PUT','/configs.json',true);
@@ -17,9 +18,22 @@ function load(){
   }
  }
 }
+
+function loadi(jsonName){
+ if(xmlHttp.readyState===0 || xmlHttp.readyState==4){
+  xmlHttp.open("PUT",jsonName+".json",true);
+  xmlHttp.send(null);
+  xmlHttp.onload = function(e) {
+   jsonResponse=JSON.parse(xmlHttp.responseText);
+   loadBlock();
+  }
+ }
+ jsonName = 0;
+}
+
 function loadNRF(){
  if(xmlHttp.readyState===0 || xmlHttp.readyState==4){
-  xmlHttp.open('PUT','/nrf.json',true);
+  xmlHttp.open("PUT","/nrf.json",true);
   xmlHttp.send(null);
   xmlHttp.onload = function(e) {
    jsonResponse=JSON.parse(xmlHttp.responseText);
@@ -27,32 +41,28 @@ function loadNRF(){
   }
  }
 }
+
+function loadi2c(){
+ if(xmlHttp.readyState===0 || xmlHttp.readyState==4){
+  xmlHttp.open('PUT','/i2c.json',true);
+  xmlHttp.send(null);
+  xmlHttp.onload = function(e) {
+   jsonResponse=JSON.parse(xmlHttp.responseText);
+   loadBlock();
+  }
+ }
+}
+
 
 function loadGet(){
  if(xmlHttp.readyState===0 || xmlHttp.readyState==4){
-  xmlHttp.open('PUT','/get.json',true);
+  xmlHttp.open('PUT','/HTTPGet.json',true);
   xmlHttp.send(null);
   xmlHttp.onload = function(e) {
    jsonResponse=JSON.parse(xmlHttp.responseText);
-   var GetJSON = JSON.stringify(xmlHttp.responseText);
    loadBlock();
   }
  }
-}
-
-var x = setInterval(function() {loadData(\"data.txt\",updateData)}, 1000);\r\n";
-function loadData(url, callback){
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function(){
- if(this.readyState == 4 && this.status == 200){
- callback.apply(xhttp);
- }
-};
-xhttp.open("GET", url, true);
-xhttp.send();
-}
-function updateData(){
- document.getElementById("data").innerHTML = this.responseText;
 }
 
 

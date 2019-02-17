@@ -4,6 +4,7 @@ void NRF_init(void) {
   radio.setPALevel(RF24_PA_MAX);
   radio.setChannel(70);
   radio.openReadingPipe(1, 0xF0F0F0F0F0LL);
+  radio.openWritingPipe(0xF000F0F0F0LL);
   radio.startListening();
   NRF_Reg();
 
@@ -18,10 +19,13 @@ void NRF_init(void) {
 }
 
 void NRF_read(void) {
+  TimeString = "";
+  DateString = "";
+  
   int Loop = 0;
   String NRF_DATA;
   
-  NRF_Reg();
+  //NRF_Reg();
   
   while (Loop < 5) {
     if (radio.available()) {
@@ -44,7 +48,7 @@ void NRF_read(void) {
   
   if (Data.temp + Data.hum + Data.light + Data.vBat != 0.00) {
     NRF_DATA += TimeString;
-    NRF_DATA += "Temp:";
+    NRF_DATA += ", ""Temp:";
     NRF_DATA += Data.temp;
     NRF_DATA += ", Humidity:";
     NRF_DATA += Data.hum;
@@ -58,8 +62,7 @@ void NRF_read(void) {
     NRF_DATA += Data.Counter;
 
     SaveData(NRF_DATA);
-    TimeString = "";
-    DateString = "";
+    
   }
   else {
     Serial.println("-----NRF data wrong-----");

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<title>Christmass Tree</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/function.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+</style>
+<body class="w3-black">
+  <center>
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="#">
+    <h1 class="w3-jumbo">Christmass Tree</h1>
+    </header>
+    <div>
+    <p>Controll your tree.</p>
+    <br><input class="w3-bar-item w3-button" value="ON"  onclick="GPIO0ON()"   type="submit">
+        <input class="w3-bar-item w3-button" value="OFF"  onclick="GPIO0OFF()"   type="submit">
+  </div>
+</center>
+
+</body>
+
+<script>
+
+   function GPIO0ON(submit){
+       server = "/GPIO?gpio0="+"HIGH";
+       send_request(submit,server);
+      }
+
+    function GPIO0OFF(submit){
+        server = "/GPIO?gpio0="+"LOW";
+        send_request(submit,server);
+       }
+
+</script>
+</html>
